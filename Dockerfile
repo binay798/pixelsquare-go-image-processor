@@ -34,8 +34,6 @@ WORKDIR /root/
 COPY --from=builder /app/main .
 
 
-# Expose the port your Fiber app is listening on
-EXPOSE 8849
 
 # Run the application
 CMD ["./main"]
