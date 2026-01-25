@@ -26,10 +26,14 @@ func main() {
 		buffer := make([]byte, fileHeader.Size)
 		file.Read(buffer)
 		options := bimg.Options{
-					Quality:       75,
-					Type:          bimg.JPEG,
-					StripMetadata: true,
-				}
+			Quality:       80,          // Sweet spot between size and artifacts
+			Type:          bimg.WEBP,    // Switching to WebP significantly reduces size
+			Lossless:      false,
+			StripMetadata: true,        // Removes EXIF data (GPS, camera info, etc.)
+			NoProfile:     true,        // Removes ICC color profiles
+			Compression:   9,           // Maximize compression effort
+			Interlace:     true,
+		}
 
 		compressed, err := bimg.NewImage(buffer).Process(options)
 		if err != nil {
