@@ -2,8 +2,21 @@ version: "3.8"
 
 services:
   go-api:
+    container_name: go-image-processor
     build:
       context: .
     ports:
       - "8849:8849" # So you can still use Postman from your host
+    networks:
+      - traefik-proxy
+    labels:
+      - "traefik.enable=true"
+      # Replace 'yourdomain.com' with your actual domain
+      - "traefik.http.routers.backend.entrypoints=web"
+      # Tell Traefik which port the Node app is listening on inside the container
+      - "traefik.http.services.backend.loadbalancer.server.port=8849"
+      - "traefik.docker.network=traefik-proxy"
 
+networks:
+  traefik-proxy:
+    external: true

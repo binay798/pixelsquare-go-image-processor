@@ -1,0 +1,25 @@
+name: Golang CI
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up SSH
+              uses: webfactory/ssh-agent@v0.5.3
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+            - name: SSH and Deploy
+              run: |
+                  ssh -o StrictHostKeyChecking=no root@46.250.245.79 << 'EOF'
+                    cd /root/apps/school-management/go-image-processor
+                    GIT_SSH_COMMAND="ssh -i ~/.ssh/contabo" git pull origin main
+                    docker compose up --build -d
+                  EOF
