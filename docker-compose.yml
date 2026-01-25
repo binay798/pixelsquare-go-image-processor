@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  go-api:
+    build:
+      context: .
+    ports:
+      - "8849:8849" # So you can still use Postman from your host
+
