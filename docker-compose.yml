@@ -9,6 +9,8 @@ services:
       - "8849" # So you can still use Postman from your host
     networks:
       - traefik-proxy
+    volumes:
+      - go_modules:/go/pkg/mod
     labels:
       - "traefik.enable=true"
       # Replace 'yourdomain.com' with your actual domain
@@ -19,4 +21,7 @@ services:
 
 networks:
   traefik-proxy:
+    external: true
+volumes:
+  go_modules:
     external: true
