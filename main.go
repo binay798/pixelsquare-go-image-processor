@@ -1,11 +1,19 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/h2non/bimg"
 )
 
 const TEMP_FOLDER  = "/tmp"
+
+func heavyTask() {
+	for i:=0; i < 10000000; i++ {
+		fmt.Println(i)
+	}
+}
 
 func main() {
 	app := fiber.New(fiber.Config{
@@ -13,6 +21,7 @@ func main() {
     })
 
 	app.Get("/", func(c *fiber.Ctx) error {
+		go heavyTask()
 		return c.SendString("Hello, World!")
 	})
 
