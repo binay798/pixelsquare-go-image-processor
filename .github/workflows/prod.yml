@@ -40,7 +40,7 @@ jobs:
       - name: SSH and Deploy
         run: |
           ssh -o StrictHostKeyChecking=no root@46.250.245.79 << 'EOF'
-            cd /root/apps/school-management/kube-config/image-compressor
+            cd /root/apps/school-management/kube-config/img-compressor
             sudo kubectl apply -f deployment.yml
             sudo kubectl apply -f service.yml
           EOF
