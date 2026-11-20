@@ -1,14 +1,21 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/h2non/bimg"
+	"github.com/joho/godotenv"
 )
 
 const TEMP_FOLDER  = "/tmp"
 
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, falling back to system environment")
+	}
 	app := fiber.New(fiber.Config{
         BodyLimit: 50 * 1024 * 1024, 
     })
@@ -47,6 +54,8 @@ func main() {
 
 
 	})
+	APP_HOST := os.Getenv("APP_HOST")
+	APP_PORT := os.Getenv("APP_PORT")
 
-	app.Listen(":8849")
+	app.Listen(APP_HOST + ":" + APP_PORT)
 }
