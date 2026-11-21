@@ -13,7 +13,7 @@ const TEMP_FOLDER  = "/tmp"
 
 
 func main() {
-	if err := godotenv.Load(); err != nil {
+	if err := godotenv.Load("/app/secrets/.env"); err != nil {
 		log.Println("No .env file found, falling back to system environment")
 	}
 	app := fiber.New(fiber.Config{
