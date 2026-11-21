@@ -1,0 +1,15 @@
+# Local build output (air) and uploaded test files
+tmp/
+uploads/
+
+# Local/private config - runtime secrets are mounted at /app/secrets by Kubernetes
+.env
+.infisical.yaml
+
+# VCS and CI metadata
+.git/
+.github/
+
+# Docker files themselves are not needed inside the build context
+Dockerfile
+docker-compose.yml
