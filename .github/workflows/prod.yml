@@ -44,5 +44,5 @@ jobs:
 
             sudo kubectl apply -f deployment.yml
             sudo kubectl apply -f service.yml
-            sudo kubectl rollout restart deployment school-mgmt-image-compressor-deployment --timeout=120s
+            sudo kubectl rollout restart deployment school-mgmt-image-compressor-deployment 
           EOF
